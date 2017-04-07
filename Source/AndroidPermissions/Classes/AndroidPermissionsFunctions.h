@@ -14,5 +14,12 @@ class UAndroidPermissionsFunctions : public UObject {
 	GENERATED_BODY()
     
 public:
+    UFUNCTION(BlueprintPure, meta = (Keywords = "android permissions"), Category = "Android")
+    static bool HasPermission(FString Permission);
 
+    UFUNCTION(BlueprintPure, meta = (Keywords = "android permissions"), Category = "Android")
+    static bool HasPermissions(TArray<FString> Permissions);
+
+    UFUNCTION(BlueprintCallable, meta = (Keywords = "android permissions"), Category = "Android")
+    static void RequestPermissions(TArray<FString> Permissions, int32 RequestCode);
 };

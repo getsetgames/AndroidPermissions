@@ -11,6 +11,28 @@
 #include "AndroidApplication.h"
 #endif
 
+bool UAndroidPermissionsFunctions::HasPermission(FString Permission)
+{
+    #if PLATFORM_ANDROID
+    #endif
+
+    return false;
+}
+
+bool UAndroidPermissionsFunctions::HasPermissions(TArray<FString> Permissions)
+{
+    #if PLATFORM_ANDROID
+    #endif
+
+    return false;
+}
+
+void UAndroidPermissionsFunctions::RequestPermissions(TArray<FString> Permissions, int32 RequestCode)
+{
+    #if PLATFORM_ANDROID
+    #endif
+}
+
 #if PLATFORM_ANDROID
 extern "C" void Java_com_epicgames_ue4_GameActivity_nativeRequestPermissionsResult(JNIEnv* jenv,
                                                                                       jobject thiz,

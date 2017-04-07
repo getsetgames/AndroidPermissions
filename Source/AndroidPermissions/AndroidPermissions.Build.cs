@@ -13,8 +13,10 @@ public class AndroidPermissions : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"AndroidPermissions/Public"
 				// ... add public include paths required here ...
+				"AndroidPermissions/Public",
+				"../../../../Source/Runtime/Core/Public",
+				"../../../../Source/Runtime/Launch/Public"
 			}
 			);
 				
