@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "AndroidPermissions",
+	"Description": "This plugin allows you to request Android permissions at runtime.",
+	"Category": "Android",
+	"CreatedBy": "Get Set Games Inc.",
+	"CreatedByURL": "http://getsetgames.com",
+	"DocsURL": "https://github.com/getsetgames/AndroidPermissions",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AndroidPermissions",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
