@@ -55,6 +55,8 @@ public class AndroidPermissions : ModuleRules
 			}
 			);
 			
+		PublicIncludePathModuleNames.Add("Launch");
+		
 		if (Target.Platform == UnrealTargetPlatform.Android)
 		{
 			string PluginPath = Utils.MakePathRelativeTo(ModuleDirectory, BuildConfiguration.RelativeEnginePath);
