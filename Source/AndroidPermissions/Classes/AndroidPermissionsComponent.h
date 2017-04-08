@@ -9,7 +9,7 @@
 #include "AndroidPermissionsFunctions.h"
 #include "AndroidPermissionsComponent.generated.h"
 
-UCLASS(ClassGroup=Advertising, HideCategories=(Activation, "Components|Activation", Collision), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=Android, HideCategories=(Activation, "Components|Activation", Collision), meta=(BlueprintSpawnableComponent))
 class UAndroidPermissionsComponent : public UActorComponent
 {
 	GENERATED_BODY()
