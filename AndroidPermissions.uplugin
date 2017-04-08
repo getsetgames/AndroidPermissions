@@ -9,7 +9,7 @@
 	"CreatedByURL": "http://getsetgames.com",
 	"DocsURL": "https://github.com/getsetgames/AndroidPermissions",
 	"MarketplaceURL": "",
-	"SupportURL": "",
+	"SupportURL": "https://github.com/getsetgames/AndroidPermissions/issues",
 	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"Installed": false,
