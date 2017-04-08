@@ -36,7 +36,7 @@ void UAndroidPermissionsFunctions::RequestPermissions(TArray<FString> Permission
 #if PLATFORM_ANDROID
 extern "C" void Java_com_epicgames_ue4_GameActivity_nativeRequestPermissionsResult(JNIEnv* jenv,
                                                                                       jobject thiz,
-                                                                                      jint requestCode
+                                                                                      jint requestCode,
                                                                                       jobjectArray permissions,
                                                                                       jintArray grantResults)
 {
@@ -53,9 +53,9 @@ extern "C" void Java_com_epicgames_ue4_GameActivity_nativeRequestPermissionsResu
     for (int i = 0; i < jNumPermissions; i++)
     {
         jstring jPermission = (jstring)jenv->GetObjectArrayElement(permissions, i);
-        const char* charsPermission = jenv->GetStringUTFChars(jProductID, 0);
+        const char* charsPermission = jenv->GetStringUTFChars(jPermission, 0);
 
-        FString ProductID(FString(UTF8_TO_TCHAR(charsPermission)));
+        FString Permission(FString(UTF8_TO_TCHAR(charsPermission)));
 
         jenv->ReleaseStringUTFChars(jPermission, charsPermission);
         jenv->DeleteLocalRef(jPermission);
