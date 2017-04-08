@@ -11,9 +11,36 @@
 #include "AndroidApplication.h"
 #endif
 
+#if PLATFORM_ANDROID
+void CreateJavaArray(JNIEnv *Env, jobjectArray &jValuesArray, TArray<FString> values)
+{
+	for (uint32 Param = 0; Param < values.Num(); Param++)
+	{
+		jstring StringValue = Env->NewStringUTF(TCHAR_TO_UTF8(*values[Param]));
+		
+		Env->SetObjectArrayElement(jValuesArray, Param, StringValue);
+		Env->DeleteLocalRef(StringValue);
+	}
+}
+#endif
+
 bool UAndroidPermissionsFunctions::HasPermission(FString Permission)
 {
     #if PLATFORM_ANDROID
+	if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
+	{
+		static jmethodID Method = FJavaWrapper::FindMethod(Env,
+														   FJavaWrapper::GameActivityClassID,
+														   "AndroidThunkJava_HasPermission",
+														   "(Ljava/lang/String;)Z",
+														   false);
+		
+		jstring jPermission = Env->NewStringUTF(TCHAR_TO_UTF8(*Permission));
+		bool Result = FJavaWrapper::CallBooleanMethod(Env, FJavaWrapper::GameActivityThis, Method, jPermission);
+		Env->DeleteLocalRef(jPermission);
+		
+		return Result;
+	}
     #endif
 
     return false;
@@ -21,15 +48,36 @@ bool UAndroidPermissionsFunctions::HasPermission(FString Permission)
 
 bool UAndroidPermissionsFunctions::HasPermissions(TArray<FString> Permissions)
 {
-    #if PLATFORM_ANDROID
-    #endif
+	for (int i = 0; i < Permissions.Num(); i++)
+	{
+		if (UAndroidPermissionsFunctions::HasPermission(Permissions[i]) == false)
+		{
+			return false;
+		}
+	}
 
-    return false;
+    return true;
 }
 
 void UAndroidPermissionsFunctions::RequestPermissions(TArray<FString> Permissions, int32 RequestCode)
 {
     #if PLATFORM_ANDROID
+	if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
+	{
+		static jmethodID Method = FJavaWrapper::FindMethod(Env,
+														   FJavaWrapper::GameActivityClassID,
+														   "AndroidThunkJava_RequestPermissions",
+														   "([Ljava/lang/String;I)V",
+														   false);
+		
+		jobjectArray jPermissions = (jobjectArray)Env->NewObjectArray(Permissions.Num(), FJavaWrapper::JavaStringClass, NULL);
+		CreateJavaArray(Env, jPermissions, Permissions);
+		
+		jint jRequestCode = (jint)RequestCode;
+		
+		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, Method, jPermissions, jRequestCode);
+		Env->DeleteLocalRef(jPermissions);		
+	}
     #endif
 }
 
