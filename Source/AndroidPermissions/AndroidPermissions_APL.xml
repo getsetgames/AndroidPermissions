@@ -54,14 +54,14 @@ public void AndroidThunkJava_RequestPermissions(String[] permissions, int reques
 	Log.debug("AndroidThunkJava_RequestPermissions permissions: " + permissions + ", requestCode: " + requestCode);
 	ActivityCompat.requestPermissions(this, permissions, requestCode);
 }
-
-@Override
-public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-	Log.debug("onRequestPermissionsResult requestCode: " + requestCode + ", permissions: " + permissions + ", grantResults: " + grantResults);
-	nativeRequestPermissionsResult(requestCode, permissions, grantResults);
-}        
         ]]></insert>
 	</gameActivityClassAdditions>
+
+	<gameActivityOnRequestPermissionsResultAdditions>
+		<insert><![CDATA[
+nativeRequestPermissionsResult(requestCode, permissions, grantResults);
+        ]]></insert>
+	</gameActivityOnRequestPermissionsResultAdditions>
 	
 	<!-- optional additions to GameActivity onCreate metadata reading in GameActivity.java -->
 	<gameActivityReadMetadataAdditions>
